@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEXAA - DevOps as a Service</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#333;
+}
+
+header{
+    background:#0a1f44;
+    color:#fff;
+    padding:60px 20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:42px;
+}
+
+header p{
+    font-size:18px;
+    margin:20px 0;
+}
+
+.btn{
+    background:#ff9800;
+    padding:12px 25px;
+    color:#fff;
+    text-decoration:none;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+section{
+    padding:60px 10%;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.price-box{
+    background:#fff;
+    padding:25px;
+    text-align:center;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+footer{
+    background:#0a1f44;
+    color:#fff;
+    text-align:center;
+    padding:30px;
+}
+
+input,textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button{
+    background:#0a1f44;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+    header h1{font-size:30px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>DEXAA</h1>
+<h3>DevOps as a Service</h3>
+<p>We manage your cloud & DevOps, so you can focus on building your product.</p>
+<a href="#contact" class="btn">Get Free Infrastructure Audit</a>
+</header>
+
+<section>
+<h2>Who We Help</h2>
+<div class="cards">
+<div class="card">Early-stage startups</div>
+<div class="card">SaaS products</div>
+<div class="card">Small teams without DevOps engineers</div>
+<div class="card">Growing businesses</div>
+</div>
+</section>
+
+<section>
+<h2>Our Services</h2>
+<div class="cards">
+
+<div class="card">
+<h3>DevOps as a Service</h3>
+<ul>
+<li>CI/CD pipelines</li>
+<li>Automated deployments</li>
+<li>Docker & Kubernetes</li>
+<li>Version control</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Cloud Setup</h3>
+<ul>
+<li>AWS / Azure / GCP</li>
+<li>Load balancing</li>
+<li>Auto-scaling</li>
+<li>Dev/Test/Prod</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Maintenance</h3>
+<ul>
+<li>Monitoring</li>
+<li>SSL & backups</li>
+<li>Incident response</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Monitoring</h3>
+<ul>
+<li>Alerts</li>
+<li>Log management</li>
+<li>Performance tracking</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Cost Optimization</h3>
+<ul>
+<li>Billing analysis</li>
+<li>Monthly reports</li>
+<li>Right sizing</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>Pricing</h2>
+<div class="pricing">
+
+<div class="price-box">
+<h3>Starter</h3>
+<p>For MVPs</p>
+<p>✔ Basic monitoring<br>
+✔ CI/CD<br>
+✔ Monthly maintenance</p>
+</div>
+
+<div class="price-box">
+<h3>Growth</h3>
+<p>For scaling startups</p>
+<p>✔ Auto scaling<br>
+✔ Advanced monitoring<br>
+✔ Kubernetes</p>
+</div>
+
+<div class="price-box">
+<h3>Scale</h3>
+<p>High traffic apps</p>
+<p>✔ 24/7 support<br>
+✔ Security audits<br>
+✔ Custom infra</p>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>About Dexaa</h2>
+<p style="text-align:center">
+Dexaa helps startups run production-grade infrastructure without complexity.
+Reliable, automated and cost-effective DevOps solutions.
+</p>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+
+<form onsubmit="sendMessage(event)">
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="email" id="email" placeholder="Your Email" required>
+<textarea id="message" placeholder="Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+
+<p id="status"></p>
+
+</section>
+
+<footer>
+<p>Email: contact@dexaa.in</p>
+<p>Phone: +91-XXXXXXXXXX</p>
+<p>Website: dexaa.in</p>
+</footer>
+
+<script>
+function sendMessage(e){
+    e.preventDefault();
+    document.getElementById("status").innerHTML =
+    "✅ Thank you! We will contact you soon.";
+}
+</script>
+
+</body>
+</html>
