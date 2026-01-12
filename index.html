@@ -4,99 +4,567 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DEXAA - DevOps as a Service</title>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f7fb;
-    color:#333;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-header{
-    background:#0a1f44;
-    color:#fff;
-    padding:60px 20px;
-    text-align:center;
+:root {
+    --primary: #0d1b2a;
+    --secondary: #1a2942;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --orange: #ec4899;
+    --success: #10b981;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --bg: #f9fafb;
+    --white: #ffffff;
+    --border: #e2e8f0;
 }
 
-header h1{
-    font-size:42px;
+html {
+    scroll-behavior: smooth;
 }
 
-header p{
-    font-size:18px;
-    margin:20px 0;
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
 
-.btn{
-    background:#ff9800;
-    padding:12px 25px;
-    color:#fff;
-    text-decoration:none;
-    border-radius:5px;
-    font-weight:bold;
+/* HEADER/NAVIGATION */
+header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: var(--white);
+    padding: 120px 20px 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-section{
-    padding:60px 10%;
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
 }
 
-h2{
-    text-align:center;
-    margin-bottom:30px;
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: rgba(249, 115, 22, 0.08);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite reverse;
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(30px); }
 }
 
-.card{
-    background:#fff;
-    padding:25px;
-    border-radius:8px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.pricing{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-.price-box{
-    background:#fff;
-    padding:25px;
-    text-align:center;
-    border-radius:8px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
-footer{
-    background:#0a1f44;
-    color:#fff;
-    text-align:center;
-    padding:30px;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-input,textarea{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(37, 99, 235, 0.8); }
 }
 
-button{
-    background:#0a1f44;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    cursor:pointer;
+@keyframes rotateIcon {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-@media(max-width:600px){
-    header h1{font-size:30px;}
+header h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    animation: slideIn 0.8s ease-out;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%);
+    border-radius: 12px;
+    animation: rotateIcon 20s linear infinite;
+}
+
+header h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+header p {
+    font-size: 18px;
+    margin: 20px 0 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #cbd5e1;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 1s ease-out 0.2s both;
+}
+
+.hero-image {
+    position: relative;
+    z-index: 1;
+    margin-top: 40px;
+    animation: fadeInScale 1s ease-out 0.4s both;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    padding: 16px 40px;
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    padding: 14px 35px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--accent);
+    color: var(--white);
+}
+
+/* SECTIONS */
+section {
+    padding: 80px 5%;
+    text-align: center;
+}
+
+section.dark {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: var(--white);
+    padding: 80px 5%;
+    width: 100%;
+    display: block;
+}
+
+h2 {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text);
+    animation: slideIn 0.6s ease-out;
+    max-width: 100%;
+}
+
+section.dark h2 {
+    color: var(--white);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--text-light);
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+section.dark .section-subtitle {
+    color: #cbd5e1;
+}
+
+/* CARDS GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    border: 1px solid var(--border);
+    position: relative;
+    animation: slideIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+    border-color: var(--accent);
+}
+
+.card-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.card ul {
+    list-style: none;
+}
+
+.card li {
+    padding: 10px 0;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+}
+
+.card li:before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+section.dark .card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+section.dark .card h3 {
+    color: var(--white);
+}
+
+section.dark .card li {
+    color: #cbd5e1;
+}
+
+/* PRICING */
+.pricing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.price-box {
+    background: var(--white);
+    padding: 50px 30px;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    transition: all 0.4s ease;
+    position: relative;
+    animation: slideIn 0.6s ease-out forwards;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.price-box:nth-child(1) { animation-delay: 0.1s; }
+.price-box:nth-child(2) { animation-delay: 0.2s; }
+.price-box:nth-child(3) { animation-delay: 0.3s; }
+
+.price-box.featured {
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+    margin-top: -10px;
+}
+
+.price-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.price-box:hover {
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+}
+
+.price-box h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.price-box p {
+    color: var(--text-light);
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.price-box ul {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.price-box ul li {
+    color: var(--text-light);
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+.price-box button {
+    margin-top: auto;
+    width: 100%;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* FORM */
+.contact-form {
+    max-width: 600px;
+    margin: 50px auto 0;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form input,
+.contact-form textarea {
+    margin: 15px 0 !important;
+}
+
+.contact-form button {
+    margin-top: auto;
+    width: 100%;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 15px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* FOOTER */
+footer {
+    background: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer p {
+    margin: 8px 0;
+    color: #cbd5e1;
+}
+
+.footer-links {
+    margin: 20px 0;
+}
+
+.footer-links a {
+    color: var(--accent-light);
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+#status {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    header {
+        padding: 80px 20px 60px;
+    }
+    
+    header h1 {
+        font-size: 40px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    header h3 {
+        font-size: 18px;
+    }
+    
+    header p {
+        font-size: 16px;
+    }
+    
+    section {
+        padding: 60px 20px;
+        text-align: center;
+    }
+    
+    section.dark {
+        padding: 60px 20px;
+    }
+    
+    h2 {
+        font-size: 32px;
+    }
+    
+    .section-subtitle {
+        max-width: 100%;
+        font-size: 16px;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .pricing {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .price-box.featured {
+        margin-top: 0;
+    }
+    
+    .hero-image {
+        margin: 30px 0;
+    }
 }
 </style>
 </head>
@@ -104,140 +572,266 @@ button{
 <body>
 
 <header>
-<h1>DEXAA</h1>
-<h3>DevOps as a Service</h3>
-<p>We manage your cloud & DevOps, so you can focus on building your product.</p>
-<a href="#contact" class="btn">Get Free Infrastructure Audit</a>
+  <h1>
+    <div class="logo">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.8" />
+          </linearGradient>
+        </defs>
+        <!-- Gears/cogs for DevOps -->
+        <circle cx="30" cy="30" r="28" fill="none" stroke="url(#logoGrad)" stroke-width="1" opacity="0.3"/>
+        <circle cx="20" cy="20" r="8" fill="none" stroke="url(#logoGrad)" stroke-width="2"/>
+        <circle cx="40" cy="20" r="6" fill="none" stroke="url(#logoGrad)" stroke-width="2"/>
+        <circle cx="30" cy="35" r="7" fill="none" stroke="url(#logoGrad)" stroke-width="2"/>
+        <!-- Inner circles -->
+        <circle cx="20" cy="20" r="3" fill="url(#logoGrad)"/>
+        <circle cx="40" cy="20" r="2" fill="url(#logoGrad)"/>
+        <circle cx="30" cy="35" r="2.5" fill="url(#logoGrad)"/>
+        <!-- Connection lines -->
+        <line x1="26" y1="24" x2="36" y2="22" stroke="url(#logoGrad)" stroke-width="1.5" opacity="0.6"/>
+        <line x1="36" y1="24" x2="32" y2="31" stroke="url(#logoGrad)" stroke-width="1.5" opacity="0.6"/>
+        <line x1="26" y1="24" x2="28" y2="31" stroke="url(#logoGrad)" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+    </div>
+    DEXAA
+  </h1>
+  <h3>Enterprise DevOps Solutions</h3>
+  <p>Production-ready infrastructure without the complexity. We're your dedicated DevOps team, handling everything from CI/CD to cloud optimization—so you can focus entirely on your product.</p>
+  
+  <div class="hero-image">
+    <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#2563eb;stop-opacity:0.3" />
+          <stop offset="100%" style="stop-color:#f97316;stop-opacity:0.1" />
+        </linearGradient>
+      </defs>
+      <!-- Cloud -->
+      <path d="M 50 80 Q 40 70 50 60 Q 70 50 80 60 Q 100 40 120 55 Q 140 50 145 70 Q 150 75 140 85 Z" fill="url(#grad1)" stroke="#3b82f6" stroke-width="2"/>
+      <!-- Server/Infrastructure -->
+      <rect x="160" y="60" width="40" height="50" fill="none" stroke="#3b82f6" stroke-width="2" rx="4"/>
+      <line x1="160" y1="75" x2="200" y2="75" stroke="#3b82f6" stroke-width="1.5"/>
+      <line x1="160" y1="90" x2="200" y2="90" stroke="#3b82f6" stroke-width="1.5"/>
+      <circle cx="165" cy="68" r="2" fill="#f97316"/>
+      <circle cx="180" cy="68" r="2" fill="#f97316"/>
+      <circle cx="195" cy="68" r="2" fill="#10b981"/>
+      <!-- Connections -->
+      <path d="M 145 70 Q 152 70 160 70" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+      <!-- Database -->
+      <circle cx="240" cy="90" r="15" fill="none" stroke="#3b82f6" stroke-width="2"/>
+      <ellipse cx="240" cy="80" rx="15" ry="6" fill="none" stroke="#3b82f6" stroke-width="2"/>
+      <line x1="225" y1="80" x2="225" y2="105" stroke="#3b82f6" stroke-width="2"/>
+      <line x1="255" y1="80" x2="255" y2="105" stroke="#3b82f6" stroke-width="2"/>
+      <!-- Connection to DB -->
+      <path d="M 200 80 Q 220 85 225 90" stroke="#f97316" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+      <!-- Animated dots -->
+      <circle cx="75" cy="120" r="3" fill="#f97316" opacity="0.5">
+        <animate attributeName="cy" values="120;130;120" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="170" cy="130" r="3" fill="#3b82f6" opacity="0.5">
+        <animate attributeName="cx" values="170;180;170" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+  
+  <a href="#contact" class="btn-primary">Schedule Your Free Audit →</a>
 </header>
 
 <section>
-<h2>Who We Help</h2>
-<div class="cards">
-<div class="card">Early-stage startups</div>
-<div class="card">SaaS products</div>
-<div class="card">Small teams without DevOps engineers</div>
-<div class="card">Growing businesses</div>
-</div>
+  <h2>Perfect For Every Stage</h2>
+  <p class="section-subtitle">Whether you're launching your MVP or scaling to millions of users, we have the expertise and infrastructure solutions you need</p>
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">🚀</div>
+      <h3>Early-Stage Startups</h3>
+      <p>Ship faster with automated deployments and zero operational overhead. Focus on building your product while we handle the infrastructure.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <h3>SaaS Companies</h3>
+      <p>Achieve 99.9% uptime with multi-region deployments, auto-scaling, and real-time monitoring. Scale seamlessly as your user base grows.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <h3>Teams Without DevOps</h3>
+      <p>Get enterprise-grade infrastructure without hiring specialists. We're your dedicated DevOps team, available 24/7 for support and optimization.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h3>High-Growth Businesses</h3>
+      <p>Complex infrastructure, custom setups, and strategic consulting. We design solutions that grow with your business and reduce costs by up to 40%.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <h2>Complete DevOps Coverage</h2>
+  <p class="section-subtitle">End-to-end solutions that eliminate DevOps complexity and unlock infrastructure excellence</p>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <h3>CI/CD & Automation</h3>
+      <ul>
+        <li>Automated deployment pipelines</li>
+        <li>GitHub/GitLab integration</li>
+        <li>Multi-environment orchestration</li>
+        <li>Container management (Docker/K8s)</li>
+        <li>Infrastructure as Code (Terraform)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">☁️</div>
+      <h3>Cloud Infrastructure</h3>
+      <ul>
+        <li>AWS, Azure & GCP expertise</li>
+        <li>Serverless architecture design</li>
+        <li>Load balancing & CDN setup</li>
+        <li>Auto-scaling optimization</li>
+        <li>Database performance tuning</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>Security & Compliance</h3>
+      <ul>
+        <li>SSL/TLS certificate management</li>
+        <li>Automated security scanning</li>
+        <li>Regular compliance audits</li>
+        <li>Disaster recovery planning</li>
+        <li>ISO 27001 certification support</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <h3>Cost Optimization</h3>
+      <ul>
+        <li>Cloud billing analysis & optimization</li>
+        <li>Reserved instance management</li>
+        <li>Resource right-sizing</li>
+        <li>Monthly detailed reports</li>
+        <li>Save up to 40% annually</li>
+      </ul>
+    </div>
+
+  </div>
 </section>
 
 <section>
-<h2>Our Services</h2>
-<div class="cards">
+  <h2>Simple, Transparent Pricing</h2>
+  <p class="section-subtitle">No hidden fees. Flexible plans that scale with your business. All plans include priority email support.</p>
+  <div class="pricing">
 
-<div class="card">
-<h3>DevOps as a Service</h3>
-<ul>
-<li>CI/CD pipelines</li>
-<li>Automated deployments</li>
-<li>Docker & Kubernetes</li>
-<li>Version control</li>
-</ul>
-</div>
+    <div class="price-box">
+      <span class="price-icon">⭐</span>
+      <h3>Starter</h3>
+      <p style="color: var(--accent); font-weight: 600; margin: 15px 0;">Perfect for MVPs</p>
+      <ul style="list-style: none; margin: 25px 0;">
+        <li>✓ Basic monitoring & alerting</li>
+        <li>✓ CI/CD pipeline setup</li>
+        <li>✓ Up to 2 team members</li>
+        <li>✓ Weekly infrastructure reviews</li>
+        <li>✓ Email support (24hrs)</li>
+      </ul>
+      <button class="btn-primary">Get Quote</button>
+    </div>
 
-<div class="card">
-<h3>Cloud Setup</h3>
-<ul>
-<li>AWS / Azure / GCP</li>
-<li>Load balancing</li>
-<li>Auto-scaling</li>
-<li>Dev/Test/Prod</li>
-</ul>
-</div>
+    <div class="price-box featured">
+      <span class="price-icon">💎</span>
+      <h3>Growth</h3>
+      <p style="color: var(--accent); font-weight: 600; margin: 15px 0;">Best for scaling teams</p>
+      <ul style="list-style: none; margin: 25px 0;">
+        <li>✓ Full DevOps management</li>
+        <li>✓ Kubernetes & multi-cloud</li>
+        <li>✓ Up to 5 team members</li>
+        <li>✓ Cost optimization reports</li>
+        <li>✓ Priority support (8hrs)</li>
+      </ul>
+      <button class="btn-primary">Get Quote</button>
+    </div>
 
-<div class="card">
-<h3>Maintenance</h3>
-<ul>
-<li>Monitoring</li>
-<li>SSL & backups</li>
-<li>Incident response</li>
-</ul>
-</div>
+    <div class="price-box">
+      <span class="price-icon">👑</span>
+      <h3>Enterprise</h3>
+      <p style="color: var(--accent); font-weight: 600; margin: 15px 0;">For mission-critical systems</p>
+      <ul style="list-style: none; margin: 25px 0;">
+        <li>✓ Dedicated DevOps engineer</li>
+        <li>✓ 99.9% SLA guarantee</li>
+        <li>✓ Unlimited team access</li>
+        <li>✓ Custom infrastructure design</li>
+        <li>✓ 24/7 phone support</li>
+      </ul>
+      <button class="btn-primary">Contact Sales</button>
+    </div>
 
-<div class="card">
-<h3>Monitoring</h3>
-<ul>
-<li>Alerts</li>
-<li>Log management</li>
-<li>Performance tracking</li>
-</ul>
-</div>
-
-<div class="card">
-<h3>Cost Optimization</h3>
-<ul>
-<li>Billing analysis</li>
-<li>Monthly reports</li>
-<li>Right sizing</li>
-</ul>
-</div>
-
-</div>
+  </div>
 </section>
 
-<section>
-<h2>Pricing</h2>
-<div class="pricing">
-
-<div class="price-box">
-<h3>Starter</h3>
-<p>For MVPs</p>
-<p>✔ Basic monitoring<br>
-✔ CI/CD<br>
-✔ Monthly maintenance</p>
-</div>
-
-<div class="price-box">
-<h3>Growth</h3>
-<p>For scaling startups</p>
-<p>✔ Auto scaling<br>
-✔ Advanced monitoring<br>
-✔ Kubernetes</p>
-</div>
-
-<div class="price-box">
-<h3>Scale</h3>
-<p>High traffic apps</p>
-<p>✔ 24/7 support<br>
-✔ Security audits<br>
-✔ Custom infra</p>
-</div>
-
-</div>
-</section>
-
-<section>
-<h2>About Dexaa</h2>
-<p style="text-align:center">
-Dexaa helps startups run production-grade infrastructure without complexity.
-Reliable, automated and cost-effective DevOps solutions.
-</p>
+<section class="dark">
+  <h2>Why Leading Teams Choose DEXAA</h2>
+  <p class="section-subtitle">We combine deep DevOps expertise with a commitment to your success</p>
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Reliability You Can Trust</h3>
+      <p>99.9% uptime SLA with real-time monitoring, instant incident response, and redundancy across regions. We keep your systems running, so your business never stops.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💡</div>
+      <h3>Expert DevOps Engineers</h3>
+      <p>13+ years average experience across AWS, Azure, GCP, Kubernetes, and Terraform. We've handled everything from startups to enterprises with millions of users.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <h3>Reduce Cloud Costs</h3>
+      <p>Save up to 40% on your cloud bill through intelligent optimization, reserved instances, and right-sizing. Monthly reports show exactly where your money goes.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔐</div>
+      <h3>Security & Compliance</h3>
+      <p>ISO 27001 certified with automated security scanning, compliance audits, and disaster recovery planning. Your data is protected with enterprise-grade standards.</p>
+    </div>
+  </div>
 </section>
 
 <section id="contact">
-<h2>Contact Us</h2>
-
-<form onsubmit="sendMessage(event)">
-<input type="text" id="name" placeholder="Your Name" required>
-<input type="email" id="email" placeholder="Your Email" required>
-<textarea id="message" placeholder="Message" required></textarea>
-<button type="submit">Send Message</button>
-</form>
-
-<p id="status"></p>
-
+  <h2>Ready to Transform Your Infrastructure?</h2>
+  <p class="section-subtitle">Schedule a free 30-minute consultation with our DevOps experts. We'll audit your current setup and create a roadmap for improvement.</p>
+  
+  <form class="contact-form" onsubmit="sendMessage(event)">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <textarea id="message" placeholder="Tell us about your business and infrastructure challenges..." required></textarea>
+    <button type="submit" class="btn-primary">Request Free Consultation</button>
+    <p id="status"></p>
+  </form>
 </section>
 
 <footer>
-<p>Email: contact@dexaa.in</p>
-<p>Phone: +91-XXXXXXXXXX</p>
-<p>Website: dexaa.in</p>
+  <h3 style="margin-bottom: 20px; font-size: 24px;">DEXAA</h3>
+  <p style="margin-bottom: 15px;">Your Trusted DevOps Partner</p>
+  <div class="footer-links">
+    <a href="mailto:contact@dexaa.in">📧 contact@dexaa.in</a>
+    <a href="tel:+91">📱 +91-XXXXXXXXXX</a>
+  </div>
+  <p style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px;">© 2024 DEXAA. All rights reserved. | Privacy Policy | Terms of Service</p>
 </footer>
 
 <script>
 function sendMessage(e){
     e.preventDefault();
-    document.getElementById("status").innerHTML =
-    "✅ Thank you! We will contact you soon.";
+    const form = e.target;
+    document.getElementById("status").innerHTML = "✅ Message sent! We'll contact you within 24 hours.";
+    form.reset();
+    setTimeout(() => {
+        document.getElementById("status").innerHTML = "";
+    }, 5000);
 }
 </script>
 
