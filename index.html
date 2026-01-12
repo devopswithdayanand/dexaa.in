@@ -178,7 +178,7 @@ header p {
     padding: 16px 40px;
     color: var(--white);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-weight: 600;
     display: inline-block;
     transition: all 0.3s ease;
@@ -186,12 +186,13 @@ header p {
     cursor: pointer;
     position: relative;
     z-index: 1;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    font-size: 16px;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 20px 45px rgba(99, 102, 241, 0.45);
     background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
 }
 
@@ -233,10 +234,18 @@ h2 {
     color: var(--text);
     animation: slideIn 0.6s ease-out;
     max-width: 100%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 section.dark h2 {
     color: var(--white);
+    -webkit-text-fill-color: white;
+    background: linear-gradient(135deg, #818cf8 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 .section-subtitle {
@@ -257,7 +266,7 @@ section.dark .section-subtitle {
 /* CARDS GRID */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     margin-top: 50px;
     width: 100%;
@@ -269,13 +278,28 @@ section.dark .section-subtitle {
 .card {
     background: var(--white);
     padding: 40px 30px;
-    border-radius: 12px;
+    border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.4s ease;
-    border: 1px solid var(--border);
+    border: 2px solid transparent;
     position: relative;
     animation: slideIn 0.6s ease-out forwards;
     opacity: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, var(--white) 0%, #f9f5ff 100%);
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--orange) 100%);
 }
 
 .card:nth-child(1) { animation-delay: 0.1s; }
@@ -284,16 +308,36 @@ section.dark .section-subtitle {
 .card:nth-child(4) { animation-delay: 0.4s; }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(99, 102, 241, 0.2);
     border-color: var(--accent);
+}
+
+section.dark .card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .card-icon {
     font-size: 48px;
     margin-bottom: 15px;
     display: inline-block;
-    animation: float 3s ease-in-out infinite;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%);
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: white;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-icon {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
 }
 
 .card h3 {
@@ -301,6 +345,10 @@ section.dark .section-subtitle {
     margin-bottom: 20px;
     color: var(--text);
     font-weight: 700;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .card ul {
@@ -369,19 +417,38 @@ section.dark .card li {
 
 .price-box.featured {
     border-color: var(--accent);
-    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 30px 60px rgba(99, 102, 241, 0.25);
     margin-top: -10px;
+    background: linear-gradient(135deg, var(--white) 0%, #f0f4ff 100%);
+    transform: scaleY(1.02);
 }
 
 .price-icon {
     font-size: 42px;
     margin-bottom: 15px;
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%);
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+}
+
+.price-box:hover .price-icon {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
 }
 
 .price-box:hover {
     border-color: var(--accent);
-    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+    box-shadow: 0 30px 60px rgba(99, 102, 241, 0.2);
+    transform: translateY(-10px);
 }
 
 .price-box h3 {
@@ -389,6 +456,10 @@ section.dark .card li {
     margin-bottom: 10px;
     color: var(--text);
     font-weight: 700;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .price-box p {
@@ -743,6 +814,7 @@ footer p {
     </div>
 
     <div class="price-box featured">
+      <div style="position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%); color: white; padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; letter-spacing: 1px;">MOST POPULAR</div>
       <span class="price-icon">💎</span>
       <h3>Growth</h3>
       <p style="color: var(--accent); font-weight: 600; margin: 15px 0;">Best for scaling teams</p>
@@ -804,12 +876,11 @@ footer p {
   <h2>Ready to Transform Your Infrastructure?</h2>
   <p class="section-subtitle">Schedule a free 30-minute consultation with our DevOps experts. We'll audit your current setup and create a roadmap for improvement.</p>
   
-  <form class="contact-form" onsubmit="sendMessage(event)">
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="email" id="email" placeholder="Your Email" required>
-    <textarea id="message" placeholder="Tell us about your business and infrastructure challenges..." required></textarea>
+  <form class="contact-form" action="https://formspree.io/f/mqazojye" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Tell us about your business and infrastructure challenges..." required></textarea>
     <button type="submit" class="btn-primary">Request Free Consultation</button>
-    <p id="status"></p>
   </form>
 </section>
 
@@ -817,23 +888,13 @@ footer p {
   <h3 style="margin-bottom: 20px; font-size: 24px;">DEXAA</h3>
   <p style="margin-bottom: 15px;">Your Trusted DevOps Partner</p>
   <div class="footer-links">
-    <a href="mailto:contact@dexaa.in">📧 contact@dexaa.in</a>
-    <a href="tel:+91">📱 +91-XXXXXXXXXX</a>
+    <a href="mailto:contact@dexaa.in">📧 contact.dexaa@gmail.com</a>
+    <a href="tel:+91">📱 +91-9019302511, +91-9481640719 </a>
   </div>
   <p style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px;">© 2024 DEXAA. All rights reserved. | Privacy Policy | Terms of Service</p>
 </footer>
 
-<script>
-function sendMessage(e){
-    e.preventDefault();
-    const form = e.target;
-    document.getElementById("status").innerHTML = "✅ Message sent! We'll contact you within 24 hours.";
-    form.reset();
-    setTimeout(() => {
-        document.getElementById("status").innerHTML = "";
-    }, 5000);
-}
-</script>
+
 
 </body>
 </html>
